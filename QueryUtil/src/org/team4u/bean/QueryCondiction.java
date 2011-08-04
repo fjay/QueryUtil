@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.team4u.SysConstants;
 
 /**
- * 条件bean4
+ * 条件bean
  * 
  * @author Jay.Wu
  */
