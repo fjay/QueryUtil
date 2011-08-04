@@ -7,7 +7,7 @@ import org.team4u.SysConstants;
 /**
  * 条件bean
  * 
- * @author Jay.Wu 3
+ * @author Jay.Wu
  */
 
 public class QueryCondiction implements Serializable {
