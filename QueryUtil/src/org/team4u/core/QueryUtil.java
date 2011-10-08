@@ -12,7 +12,7 @@ import org.team4u.SysConstants;
 import org.team4u.bean.QueryCondiction;
 import org.team4u.util.StringUtil;
 
-public class QueryUtil {
+public class QueryUtil implements Cloneable {
 
 	private QueryAppend queryAppend = new QueryAppend();
 
@@ -23,6 +23,8 @@ public class QueryUtil {
 	private String queryString;
 
 	private Object pager;
+
+	private boolean convert = true;
 
 	private List<Object> paramValues = new ArrayList<Object>();
 
@@ -51,7 +53,8 @@ public class QueryUtil {
 					throw new RuntimeException("Missing param: " + paramGroup + ", using key: " + queryKey);
 				}
 
-				queryString = queryString.replaceAll(paramGroup + "\\b", "? ");
+				// queryString = queryString.replaceAll(paramGroup + "\\b",
+				// "? ");
 				paramValues.add(value);
 			}
 		}
@@ -60,6 +63,15 @@ public class QueryUtil {
 			queryAppend.setQueryString(queryString);
 			queryString = queryAppend.process();
 			paramValues.addAll(queryAppend.getParamValues());
+		}
+
+		m = p.matcher(queryString);
+
+		if (convert) {
+			while (m.find()) {
+				String paramGroup = m.group(0).trim();
+				queryString = queryString.replaceAll(paramGroup + "\\b", "? ");
+			}
 		}
 
 		queryClear();
@@ -173,8 +185,16 @@ public class QueryUtil {
 		return this;
 	}
 
+	public Map<String, QueryCondiction> condictions() {
+		return queryAppend.params();
+	}
+
 	public QueryCondiction getQueryCondiction(String key) {
 		return queryAppend.get(key);
+	}
+
+	public Map<String, Object> params() {
+		return queryFilter.params();
 	}
 
 	public QueryUtil put(String key, Object value) {
@@ -205,5 +225,17 @@ public class QueryUtil {
 
 	public <T> void setPager(T pager) {
 		this.pager = pager;
+	}
+
+	public boolean isConvert() {
+		return convert;
+	}
+
+	public void setConvert(boolean convert) {
+		this.convert = convert;
+	}
+
+	public QueryUtil clone() throws CloneNotSupportedException {
+		return (QueryUtil) super.clone();
 	}
 }

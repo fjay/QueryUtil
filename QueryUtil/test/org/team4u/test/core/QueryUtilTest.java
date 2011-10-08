@@ -51,4 +51,20 @@ public class QueryUtilTest {
 		queryUtil.process();
 		System.out.println(queryUtil.getQueryString());
 	}
+
+	@Test
+	public void withoutConvert() {
+		String queryString = "select * from ss where a = @a and $[d = @d and] @append_cnd and b = 1 and 1 != $fixed";
+
+		QueryUtil queryUtil = new QueryUtil();
+		queryUtil.setConvert(false);
+		queryUtil.setQueryString(queryString);
+		queryUtil.put("a", 11);
+		queryUtil.put("d", "124");
+		queryUtil.put("$fixed", "aaaa");
+		queryUtil.append("append_b", ">", 1);
+		queryUtil.process();
+		System.out.println(queryUtil.getQueryString());
+		System.out.println(queryUtil.getParamValues());
+	}
 }

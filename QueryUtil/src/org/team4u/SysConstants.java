@@ -29,17 +29,17 @@ public class SysConstants {
 	/**
 	 * 默认动态语句规则
 	 */
-	public static final String DEFAULT_DYNAMIC_RULE = "\\$\\[(.+?)\\]";
+	public static String DEFAULT_DYNAMIC_RULE = "\\$\\[(.+?)\\]";
 
 	/**
 	 * 默认占位符前缀规则
 	 */
-	public static final String DEFAULT_PLACEHOLDER_PREFIX = "\\$";
+	public static String DEFAULT_PLACEHOLDER_PREFIX = "\\$";
 
 	/**
 	 * 默认参数前缀规则
 	 */
-	public static final String DEFAULT_PARAM_PREFIX = "@";
+	public static String DEFAULT_PARAM_PREFIX = "@";
 
 	/**
 	 * 默认参数规则

@@ -21,6 +21,10 @@ public class QueryFilter {
 
 	private Map<String, Object> paramMap = new HashMap<String, Object>();
 
+	public Map<String, Object> params() {
+		return paramMap;
+	}
+
 	public void put(String key, Object value) {
 		if (StringUtil.isBlank(value)) {
 			paramMap.remove(key);

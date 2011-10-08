@@ -19,6 +19,10 @@ public class QueryAppend {
 
 	private String appendRule = SysConstants.DEFAULT_PARAM_PREFIX + SysConstants.DEFAULT_APPEND_RULE;
 
+	public Map<String, QueryCondiction> params() {
+		return paramMap;
+	}
+
 	public void put(String key, QueryCondiction value) {
 		paramMap.put(key, value);
 	}
@@ -84,12 +88,14 @@ public class QueryAppend {
 				continue;
 			}
 
-			wrap(whereBuilder, condictionsBean, "?");
+			wrap(whereBuilder, condictionsBean,
+					SysConstants.DEFAULT_PARAM_PREFIX + condictionsBean.getProperty());
 			paramValues.add(condictionsBean.getValue());
 
 			// 处理between条件
 			if (StringUtil.containsIgnoreCase(condictionsBean.getOperation(), SysConstants.OPERATON_BETWEEN)) {
-				whereBuilder.append(SysConstants.OPERATON_AND).append(" ? ");
+				whereBuilder.append(SysConstants.OPERATON_AND).append(
+						" " + SysConstants.DEFAULT_PARAM_PREFIX + condictionsBean.getProperty() + "_ ");
 				paramValues.add(condictionsBean.getAnotherValue());
 			}
 		}
@@ -121,4 +127,5 @@ public class QueryAppend {
 	public void setAppendRule(String appendRule) {
 		this.appendRule = appendRule;
 	}
+
 }

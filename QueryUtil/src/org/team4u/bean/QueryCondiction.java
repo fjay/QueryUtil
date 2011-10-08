@@ -9,7 +9,6 @@ import org.team4u.SysConstants;
  * 
  * @author Jay.Wu
  */
-
 public class QueryCondiction implements Serializable {
 
 	/**
