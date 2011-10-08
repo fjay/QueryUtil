@@ -180,6 +180,11 @@ public class QueryUtil implements Cloneable {
 		}
 	}
 
+	public QueryUtil append(String key, Object value) {
+		queryAppend.put(key, SysConstants.RULE_EQUAL, value);
+		return this;
+	}
+
 	public QueryUtil append(String key, String operation, Object value) {
 		queryAppend.put(key, operation, value);
 		return this;
